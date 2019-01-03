@@ -10,6 +10,9 @@ namespace TestApiBinding
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            //GlobalConfiguration.Configuration.ParameterBindingRules.Insert(0, TestApiBinding.Common.SimplePostVariableParameterBinding.HookupParameterBinding);
+            GlobalConfiguration.Configuration.ParameterBindingRules.Insert(0, (des) => new Common.MultipleParameterFromBodyParameterBinding(des));
+            
 
             // Web API routes
             config.MapHttpAttributeRoutes();

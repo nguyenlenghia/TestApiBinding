@@ -22,8 +22,12 @@ namespace TestApiBinding.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]DateTime? value)
         {
+            return Ok(new
+            {
+                Data = value
+            });
         }
 
         // PUT api/values/5
@@ -34,6 +38,20 @@ namespace TestApiBinding.Controllers
         // DELETE api/values/5
         public void Delete(int id)
         {
+        }
+
+        // POST api/TestMultiParams
+        [Route("api/TestMultiParams")]
+        [HttpPost]
+        //[AcceptVerbs(HttpMethod.Post)]
+        [Common.MultiParameterSupport]
+        public IHttpActionResult TestMultiParams(string value1, string value2)
+        {
+            return Ok(new
+            {
+                value1 = value1,
+                value2 = value2
+            });
         }
     }
 }
